@@ -25,6 +25,9 @@ export default function Home() {
         const res = await fetch("https://api.maenox.com/events");
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
+        // Sort events by start_date ascending
+        data.sort((a:Event, b:Event) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime());
+
         setEvents(data);
       } catch (err) {
         console.error(err);
@@ -34,6 +37,25 @@ export default function Home() {
     }
     fetchEvents();
   }, []);
+
+  function formatEventDate(start: string, end: string) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    // Options for formatting
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+
+    if (start === end) {
+      return startDate.toLocaleDateString(undefined, options);
+    } else {
+      return `${startDate.toLocaleDateString(undefined, options)} – ${endDate.toLocaleDateString(undefined, options)}`;
+    }
+  }
 
   return (
     <main className="p-8 max-w-4xl mx-auto relative">
@@ -70,7 +92,7 @@ export default function Home() {
                     {event.title}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300">
-                    {event.start_date} – {event.end_date}
+                    {formatEventDate(event.start_date, event.end_date)}
                   </p>
                   <p className="text-gray-500 dark:text-gray-400 mb-2">{event.location}</p>
 
