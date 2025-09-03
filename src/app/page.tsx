@@ -53,11 +53,9 @@ export default function Home() {
       <ul className="space-y-6">
         {events.map((event) => (
           <li key={event.id}>
-            <a
-              href={event.detailsUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md transition hover:bg-gray-50 dark:hover:bg-gray-800"
+            <div
+              onClick={() => event.detailsUrl && window.open(event.detailsUrl, "_blank")}
+              className="cursor-pointer block border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm hover:shadow-md transition hover:bg-gray-50 dark:hover:bg-gray-800"
             >
               <div className="flex flex-col md:flex-row gap-4">
                 {event.imageUrl && (
@@ -82,7 +80,7 @@ export default function Home() {
                       href={event.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()} // prevent card navigation
+                      onClick={(e) => e.stopPropagation()} // prevent card click
                       className="text-blue-500 dark:text-blue-400 hover:underline"
                     >
                       {event.sourceName}
@@ -90,10 +88,11 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
           </li>
         ))}
       </ul>
+
     </main>
   );
 }
