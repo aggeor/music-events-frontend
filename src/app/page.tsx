@@ -55,9 +55,9 @@ export default function Home() {
   // Split into upcoming & past
   const now = new Date();
   const upcomingEvents = events.filter(
-    (e) => new Date(e.start_date) >= now
+    (e) => new Date(e.start_date) >= now || new Date(e.end_date) >= now
   );
-  const pastEvents = events.filter((e) => new Date(e.start_date) < now);
+  const pastEvents = events.filter((e) => new Date(e.start_date) < now && new Date(e.end_date) < now);
 
   return (
     <main className="p-8 max-w-4xl mx-auto relative">
