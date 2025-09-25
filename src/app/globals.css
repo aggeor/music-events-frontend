@@ -125,29 +125,103 @@
 a {
   color:blue;
 }
-
-/* Calendar dark mode overrides */
-.dark .react-calendar {
-  background-color: #1f2937; /* Tailwind gray-800 */
-  color: #f9fafb; /* Tailwind gray-50 */
-  border-radius: 0.75rem; /* rounded-xl */
-  border: 1px solid #374151; /* gray-700 */
+/* Calendar base styling */
+.react-calendar {
+  @apply rounded-xl overflow-hidden w-full;
+  background-color: white;
+  color: #111827; /* gray-900 */
+  font-family: inherit;
+  border: none; /* remove default border */
+  box-shadow: none; /* remove any default shadows that look like borders */
 }
 
-.dark .react-calendar__tile {
+/* Calendar tiles */
+.react-calendar__tile {
+  @apply rounded-lg transition-colors flex items-center justify-center text-sm;
+  min-height: 3rem; /* ensure consistent tile size */
+  padding: 0.5rem;
   background-color: transparent;
-  color: #f9fafb;
+  color: inherit;
+  margin: 0.25rem; /* small spacing between tiles */
+  border: none; /* remove tile borders */
+}
+.react-calendar,
+.react-calendar * {
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.dark .react-calendar__tile:hover {
-  background-color: #374151; /* gray-700 */
+.react-calendar table {
+  border-collapse: separate; /* optional, gives spacing if needed */
+  border-spacing: 0.25rem; /* spacing between tiles */
+}
+
+.react-calendar th,
+.react-calendar td {
+  border: none;
+}
+
+/* Hover state */
+.react-calendar__tile:hover:not(.react-calendar__tile--active):not(.react-calendar__tile--now) {
+  @apply bg-gray-200;
+}
+
+/* Selected date */
+.react-calendar__tile--active {
+  @apply bg-blue-600 text-white font-semibold rounded-xl;
+}
+
+/* Today */
+.react-calendar__tile--now:not(.react-calendar__tile--active) {
+  @apply bg-blue-300 text-white font-semibold rounded-xl;
+}
+
+/* Weekends */
+.react-calendar__month-view__days__day--weekend {
+  @apply text-purple-500;
+  border: none; /* remove all tile borders */
+}
+
+/* Dark mode overrides */
+.dark .react-calendar {
+  @apply bg-gray-800 text-gray-50;
+  border: none; /* remove dark mode border */
+}
+
+.dark .react-calendar__tile:hover:not(.react-calendar__tile--active):not(.react-calendar__tile--now) {
+  @apply bg-gray-700;
 }
 
 .dark .react-calendar__tile--active {
-  background-color: #3b82f6; /* blue-500 */
-  color: white;
+  @apply bg-blue-700 text-white font-semibold rounded-xl;
+}
+
+.dark .react-calendar__tile--now:not(.react-calendar__tile--active) {
+  @apply bg-blue-500 text-white font-semibold rounded-xl;
 }
 
 .dark .react-calendar__month-view__days__day--weekend {
-  color: #f87171; /* red-400 for weekends */
+  @apply text-purple-400;
 }
+
+/* Navigation buttons */
+.react-calendar__navigation button {
+  @apply rounded-md px-3 py-1 transition-colors;
+}
+.react-calendar__navigation button:hover {
+  @apply bg-gray-100 dark:bg-gray-700;
+}
+.react-calendar__navigation button:focus {
+  @apply outline-none ring-2 ring-blue-500;
+}
+
+/* Ensure tiles are centered and consistent */
+.react-calendar__month-view__days__day {
+  @apply flex items-center justify-center;
+}
+
+/* Responsive max-width */
+.react-calendar {
+  max-width: 100%;
+}
+

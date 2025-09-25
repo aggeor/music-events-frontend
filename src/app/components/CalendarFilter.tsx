@@ -14,7 +14,7 @@ export default function CalendarFilter({ value, onDateChange }: Props) {
       <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">
         📅 Pick a Date
       </h2>
-      <div className="react-calendar-wrapper">
+      <div className="react-calendar">
         <Calendar
           value={value}
           onChange={(date) => onDateChange(date as Date)}
@@ -23,7 +23,7 @@ export default function CalendarFilter({ value, onDateChange }: Props) {
       {value && (
         <button
           onClick={() => onDateChange(null)}
-          className="mt-3 px-3 py-1 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600"
+          className="mt-3 px-3 py-1 bg-purple-500 text-white rounded-lg text-sm hover:bg-purple-600"
         >
           Clear
         </button>
