@@ -125,3 +125,29 @@
 a {
   color:blue;
 }
+
+/* Calendar dark mode overrides */
+.dark .react-calendar {
+  background-color: #1f2937; /* Tailwind gray-800 */
+  color: #f9fafb; /* Tailwind gray-50 */
+  border-radius: 0.75rem; /* rounded-xl */
+  border: 1px solid #374151; /* gray-700 */
+}
+
+.dark .react-calendar__tile {
+  background-color: transparent;
+  color: #f9fafb;
+}
+
+.dark .react-calendar__tile:hover {
+  background-color: #374151; /* gray-700 */
+}
+
+.dark .react-calendar__tile--active {
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+}
+
+.dark .react-calendar__month-view__days__day--weekend {
+  color: #f87171; /* red-400 for weekends */
+}

@@ -3,7 +3,7 @@
 import React from "react";
 
 type Props = {
-  activeTab: "upcoming" | "past";
+  activeTab: "upcoming" | "past" | undefined;
   setActiveTab: (tab: "upcoming" | "past") => void;
   totalUpcomingEvents: number;
   totalPastEvents: number;
